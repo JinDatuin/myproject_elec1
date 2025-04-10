@@ -73,6 +73,8 @@ class ManageEmployeeController extends Controller
         $employee->contactno = $request->input('contactno');
         $employee->save();
 
+        $msg = $request->input('employee_id').' Added Successfully';
+        Log::info($msg);
         return redirect()->back()
             ->with('mode', 'bg-success ')
             ->with('message', 'Employee ' . $employee->employee_id . ' added successfully');
@@ -134,6 +136,8 @@ class ManageEmployeeController extends Controller
             $employee->contactno = $request->input('contactno_edit');
             $employee->save();
 
+            $msg = $employee->id.' Updated Successfully';
+            Log::info($msg);
             return redirect()->back()
                 ->with('mode', 'bg-warning')
                 ->with('message', 'Employee ' . $employee->employee_id . ' updated successfully');
@@ -154,6 +158,9 @@ class ManageEmployeeController extends Controller
         } catch (Exception $e) {
 
         }
+
+        $msg = $employee->id.' Deleted Successfully';
+        Log::info($msg);
 
         return redirect()->back()
             ->with('mode', 'bg-danger ')
